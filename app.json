@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "PlacesApp Workshop",
+    "slug": "PlacesApp",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "androidStatusBarColor": "#334393",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#334393"
+    },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/icon.png",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.br.maps.example",
+      "config": {
+	      "googleMaps": {
+	        "apiKey": "AIzaSyBoGdzt-mVtwdClWhXG0d6mAbhAGIP43lU"
+	      }
+	    }
+    },
+    "ios": {
+      "bundleIdentifier": "com.br.maps.example",
+      "supportsTablet": true
+    }
+  }
+}
