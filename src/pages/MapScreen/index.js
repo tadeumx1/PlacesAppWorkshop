@@ -11,13 +11,7 @@ export default class MapScreen extends Component {
   async requestLocationPermission() {
     try {
 
-      let { status } = await Permissions.askAsync(Permissions.LOCATION);
       
-      if(status === 'granted') {
-        return true
-      } else {
-        return false
-      }
 
     } catch (err) {
         console.warn(err)
@@ -26,24 +20,15 @@ export default class MapScreen extends Component {
   }
 
   async componentDidMount() {
-    let isGranted = await this.requestLocationPermission();
-    if (!isGranted) {
+    // let isGranted = await this.requestLocationPermission();
+    /* if (!isGranted) {
 
       Alert.alert(
         'Mensagem',
         'Localização não habilitada, ative a localização e reinicie o aplicativo'
       )
 
-    }
-
-    const { locationServicesEnabled, gpsAvailable } = await Location.getProviderStatusAsync()
-
-    if (locationServicesEnabled != true || gpsAvailable != true) {
-      Alert.alert(
-        'Mensagem',
-        'Habilite o GPS e Localização do seu dispositivo'
-      )
-    }
+    } */
 
   }
 
@@ -59,9 +44,7 @@ export default class MapScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  
   container: {
     flex: 1,
   },
-
 }); 

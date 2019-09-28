@@ -11,26 +11,13 @@ export default function PlacesScreen() {
   useEffect(() => {
     async function loadPlaces() {
 
-      const response = await api.get('/data')
-
-      setData(response.data);
     }
 
     loadPlaces();
   }, []);
 
-  renderListItem = ({ item }) => <PlaceItem repository={item} />
-
   return (
     <View style={styles.container}>
-
-      <FlatList
-        data={data}
-        keyExtractor={item => String(item.id)}
-        renderItem={renderListItem}
-        // onRefresh={this.loadRepositories}
-        // refreshing={this.state.refreshing}
-      />
 
     </View>
   );
