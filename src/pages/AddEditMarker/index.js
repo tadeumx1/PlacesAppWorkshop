@@ -25,14 +25,19 @@ import {
   ButtonText
 } from "./styles";
 
+const ADDRESS_COUNTRY = "Brasil"
+
 export default function AddEditMarker(props) {
   const { register, setValue, handleSubmit } = useForm();
   const [markerUpdate, setMarkerUpdate] = useState(false);
-  const [title, setTitle] = useState('Adicionar marcador"');
+  const [title, setTitle] = useState('Adicionar marcador');
 
   useEffect(() => {
     async function handleAddEditMarker() {
-      if (props.navigation.getParam("markerId", "Não veio ID") != null) {
+      console.log('markerId')
+      console.log(props.navigation.getParam("markerId"))
+      if (props.navigation.getParam("markerId")) {
+        console.log('entrou')
         setMarkerUpdate(true)
         setTitle("Editar marcador")
       }
@@ -42,8 +47,6 @@ export default function AddEditMarker(props) {
   }, []);
 
   const onSubmit = async data => {
-    console.log(data);
-    console.log(markerUpdate, "titulo")
 
     const {
       streetPlace,
@@ -54,18 +57,19 @@ export default function AddEditMarker(props) {
     } = data;
 
     const placeCreateRequest = {
-      address:
-        streetPlace +
-        " " +
-        numberPlace +
-        ", " +
-        ZipCodePlace +
-        ", " +
-        statePlace,
+      address_street: streetPlace,
+      address_number: numberPlace,
+      address_zip_code: ZipCodePlace,
+      address_state: statePlace,
+      address_country: ADDRESS_COUNTRY,
       company_id: companyID
     };
 
     console.log(placeCreateRequest);
+
+    if(!markerUpdate) {
+
+      console.log('certo');
 
     // const response = await api.post('/places', placeCreateRequest)
     // console.log(response.data)
@@ -76,6 +80,13 @@ export default function AddEditMarker(props) {
           "Estabelecimento criado com sucesso"
         )
       } */
+
+    } else {
+
+      // Chamar o PUT da API para atualizar os dados do marcador
+
+    }
+
   };
 
   return (

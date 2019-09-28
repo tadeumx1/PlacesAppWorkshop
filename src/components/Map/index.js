@@ -50,8 +50,9 @@ export default class Map extends Component {
     this.setState({ markers: response.data });
   };
 
-  handleMarkerButton = async (marker) => {
-    console.log(marker)
+  handleMarkerButton = (marker) => {
+    console.log('MARKER')
+    console.log(marker.id)
     this.props.navigation.navigate('AddEditMarker', { 
       markerId: marker.id
      })
