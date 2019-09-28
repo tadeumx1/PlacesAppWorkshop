@@ -1,170 +1,165 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import useForm from 'react-hook-form';
+import useForm from "react-hook-form";
 
-import { StatusBar, ActivityIndicator, AsyncStorage, ScrollView, Alert } from 'react-native';
-import api from '../../services/api'
+import {
+  StatusBar,
+  ActivityIndicator,
+  AsyncStorage,
+  ScrollView,
+  Alert
+} from "react-native";
+import api from "../../services/api";
 
-import { Container, Title, Label, FormContainer, CardContainer, TextInformation, Error, Form, Input, Button, ButtonText } from './styles'
+import {
+  Container,
+  Title,
+  Label,
+  FormContainer,
+  CardContainer,
+  TextInformation,
+  Error,
+  Form,
+  Input,
+  Button,
+  ButtonText
+} from "./styles";
 
 export default function AddEditMarker(props) {
+  const { register, setValue, handleSubmit } = useForm();
+  const [title, setTitle] = useState();
 
-    const { register, setValue, handleSubmit } = useForm();
-    const [title, setTitle] = useState();
-
-    useEffect(() => {
-      async function handleAddEditMarker() {
-          if(props.navigation.getParam('markerId')) {
-
-          }
+  useEffect(() => {
+    async function handleAddEditMarker() {
+      if (props.navigation.getParam("markerId")) {
       }
+    }
 
-      handleAddEditMarker()
+    handleAddEditMarker();
+  }, []);
 
-    }, [])
+  const onSubmit = async data => {
+    console.log(data);
 
-    const onSubmit =  async data => {
-      console.log(data);
+    const {
+      streetPlace,
+      numberPlace,
+      ZipCodePlace,
+      statePlace,
+      companyID
+    } = data;
 
-      const { streetPlace, numberPlace, ZipCodePlace, statePlace, companyID } = data
+    const placeCreateRequest = {
+      address:
+        streetPlace +
+        " " +
+        numberPlace +
+        ", " +
+        ZipCodePlace +
+        ", " +
+        statePlace,
+      company_id: companyID
+    };
 
-      const placeCreateRequest = {
-        address: streetPlace + " " + numberPlace + ", " + ZipCodePlace + ", " + statePlace,
-        company_id: companyID
-      }
+    console.log(placeCreateRequest);
 
-      console.log(placeCreateRequest)
-    
-      // const response = await api.post('/places', placeCreateRequest)
-      // console.log(response.data)
+    // const response = await api.post('/places', placeCreateRequest)
+    // console.log(response.data)
 
-      /* if(response.data) {
+    /* if(response.data) {
         Alert(
           "Mensagem",
           "Estabelecimento criado com sucesso"
         )
       } */
+  };
 
-    }
-  
-    return (
-        <Container>
+  return (
+    <Container>
+      <StatusBar barStyle="light-content" />
 
-            <StatusBar barStyle="light-content" /> 
+      <CardContainer>
+        <Title>Adicionar marcador</Title>
+      </CardContainer>
 
-            <CardContainer>
+      <ScrollView>
+        <FormContainer>
+          <Form>
+            <Label>Rua do estabelecimento</Label>
 
-              <Title>Adicionar marcador</Title>
+            <Input
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite a rua"
+              underlineColorAndroid="rgba(0, 0, 0, 0)"
+              ref={register({ name: "streetPlace" })}
+              onChangeText={text => setValue("streetPlace", text)}
+            />
+          </Form>
 
-            </CardContainer>
+          <Form>
+            <Label>Número do estabelecimento</Label>
 
-            <ScrollView>
+            <Input
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite o número"
+              underlineColorAndroid="rgba(0, 0, 0, 0)"
+              ref={register({ name: "numberPlace" })}
+              onChangeText={text => setValue("numberPlace", text)}
+            />
+          </Form>
 
-            <FormContainer>
+          <Form>
+            <Label>CEP do estabelecimento</Label>
 
-            <Form>
+            <Input
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite o CEP"
+              underlineColorAndroid="rgba(0, 0, 0, 0)"
+              ref={register({ name: "ZipCodePlace" })}
+              onChangeText={text => setValue("ZipCodePlace", text)}
+            />
+          </Form>
 
-              <Label>Rua do estabelecimento</Label>
+          <Form>
+            <Label>Estado do estabelecimento</Label>
 
-              <Input
+            <Input
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite o estado"
+              underlineColorAndroid="rgba(0, 0, 0, 0)"
+              ref={register({ name: "statePlace" })}
+              onChangeText={text => setValue("statePlace", text)}
+            />
+          </Form>
 
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite a rua"
-                underlineColorAndroid='rgba(0, 0, 0, 0)'
-                ref={register({ name: 'streetPlace' })}
-                onChangeText={text => setValue('streetPlace', text)}
+          <Form>
+            <Label>ID da empresa responsável pelo estabelecimento</Label>
 
-              />
+            <Input
+              autoCapitalize="none"
+              autoCorrect={false}
+              placeholder="Digite o ID da empresa"
+              underlineColorAndroid="rgba(0, 0, 0, 0)"
+              ref={register({ name: "companyID" })}
+              onChangeText={text => setValue("companyID", text)}
+            />
+          </Form>
 
-            </Form>
-
-            <Form>
-
-              <Label>Número do estabelecimento</Label>
-
-              <Input
-
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite o número"
-                underlineColorAndroid='rgba(0, 0, 0, 0)'
-                ref={register({ name: 'numberPlace' })}
-                onChangeText={text => setValue('numberPlace', text)}
-
-              />
-
-            </Form>
-
-            <Form>
-
-              <Label>CEP do estabelecimento</Label>
-
-              <Input
-
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite o CEP"
-                underlineColorAndroid='rgba(0, 0, 0, 0)'
-                ref={register({ name: 'ZipCodePlace' })}
-                onChangeText={text => setValue('ZipCodePlace', text)}
-
-              />
-
-            </Form>
-
-            <Form>
-
-              <Label>Estado do estabelecimento</Label>
-
-              <Input
-
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite o estado"
-                underlineColorAndroid='rgba(0, 0, 0, 0)'
-                ref={register({ name: 'statePlace' })}
-                onChangeText={text => setValue('statePlace', text)}
-
-              />
-
-            </Form>  
-
-            <Form>
-
-              <Label>ID da empresa responsável pelo estabelecimento</Label>
-
-              <Input
-
-                autoCapitalize="none"
-                autoCorrect={false}
-                placeholder="Digite o ID da empresa"
-                underlineColorAndroid='rgba(0, 0, 0, 0)'
-                ref={register({ name: 'companyID' })}
-                onChangeText={text => setValue('companyID', text)}
-
-              />
-
-            </Form>
-
-              <Button onPress={handleSubmit(onSubmit)}>
-
-                { loading
-                ? <ActivityIndicator size="small" color='#FFF' />
-                : <ButtonText>Prosseguir</ButtonText> }
-
-              </Button>
-
-            </FormContainer>
-
-            </ScrollView>
-
-        </Container>
-    );
+          <Button onPress={handleSubmit(onSubmit)}>
+            <ButtonText>Prosseguir</ButtonText>
+          </Button>
+        </FormContainer>
+      </ScrollView>
+    </Container>
+  );
 }
 
 AddEditMarker.navigationOptions = () => {
-    return {
-      header: null
-    }
-}
+  return {
+    header: null
+  };
+};
