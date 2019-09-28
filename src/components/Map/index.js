@@ -70,7 +70,7 @@ export default class Map extends Component {
       >
         <MapView.Callout onPress={() => this.handleMarkerButton(marker)} />
       </MapView.Marker>
-    ));
+    )); 
   };
 
   render() {
