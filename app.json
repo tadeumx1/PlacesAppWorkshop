@@ -32,7 +32,7 @@
       "package": "com.br.maps.example",
       "config": {
 	      "googleMaps": {
-	        "apiKey": "AIzaSyBoGdzt-mVtwdClWhXG0d6mAbhAGIP43lU"
+	        "apiKey": "Coloque a API Key Aqui"
 	      }
 	    }
     },
