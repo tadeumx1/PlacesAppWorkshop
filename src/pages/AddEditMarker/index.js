@@ -27,11 +27,14 @@ import {
 
 export default function AddEditMarker(props) {
   const { register, setValue, handleSubmit } = useForm();
-  const [title, setTitle] = useState();
+  const [markerUpdate, setMarkerUpdate] = useState(false);
+  const [title, setTitle] = useState('Adicionar marcador"');
 
   useEffect(() => {
     async function handleAddEditMarker() {
-      if (props.navigation.getParam("markerId")) {
+      if (props.navigation.getParam("markerId", "Não veio ID") != null) {
+        setMarkerUpdate(true)
+        setTitle("Editar marcador")
       }
     }
 
@@ -40,6 +43,7 @@ export default function AddEditMarker(props) {
 
   const onSubmit = async data => {
     console.log(data);
+    console.log(markerUpdate, "titulo")
 
     const {
       streetPlace,
@@ -79,7 +83,7 @@ export default function AddEditMarker(props) {
       <StatusBar barStyle="light-content" />
 
       <CardContainer>
-        <Title>Adicionar marcador</Title>
+        <Title>{title}</Title>
       </CardContainer>
 
       <ScrollView>
